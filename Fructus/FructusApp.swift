@@ -10,6 +10,7 @@ import SwiftData
 
 @main
 struct FructusApp: App {
+    @AppStorage("isOnboarding") var isOnboarding: Bool = true
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
             Item.self,
@@ -25,7 +26,11 @@ struct FructusApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            if (isOnboarding) {
+                OnboardingView()
+            } else {
+                ContentView()
+            }
         }
         .modelContainer(sharedModelContainer)
     }
